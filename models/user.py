@@ -27,5 +27,4 @@ class User(Base):
 
         session.commit()
 
-# Base.metadata.create_all(engine)
-# session.commit()
+
