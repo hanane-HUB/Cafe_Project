@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>signup</title>
+<!--  	<link href="login.css" rel="stylesheet">-->
+	<link href="{{ url_for('static', filename='signup.css')}}" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+	<!-- code here -->
+	<div class="card">
+		<div class="card-image">
+			<h2 class="card-heading">
+				Get started
+				<small>Let us create your account</small>
+			</h2>
+		</div>
+		<form class="card-form" action="{{ url_for('sign_up') }}" method="post">
+			<div class="input">
+				<input name="first_name" type="text" class="input-field"  required/>
+				<label class="input-label">First name</label>
+			</div>
+			<div class="input">
+				<input name="last_name" type="text" class="input-field"  required/>
+				<label class="input-label">Last name</label>
+			</div>
+			<div class="input">
+				<input name="email" type="text" class="input-field"  required/>
+				<label class="input-label">Email</label>
+			</div>
+			<div class="input">
+				<input name="phone" type="text" class="input-field"  required/>
+				<label class="input-label">Phone</label>
+			</div>
+			<div class="input">
+				<input name="password" type="password" class="input-field" required/>
+				<label class="input-label">Password</label>
+			</div>
+			<div class="action">
+				<button class="action-button">Sign up</button>
+			</div>
+		</form>
+		<div class="card-info">
+			<p>By signing up you are agreeing to our <a href="#">Terms and Conditions</a></p>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
