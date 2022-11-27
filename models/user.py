@@ -4,7 +4,8 @@ from Cafe_Project.core.db_manager import Base, session, engine
 
 class User(Base):
     __tablename__ = 'users'
-    username = Column('user_name', String(30), primary_key=True)
+    id = Column('user_id', Integer, primary_key=True, autoincrement=True)
+    username = Column('user_name', String(30))
     first_name = Column(String(15))
     last_name = Column(String(15))
     phone = Column(String(11))
