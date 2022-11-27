@@ -1,10 +1,11 @@
-from core.db_manager import Base, session
 from sqlalchemy import Column, Integer, String
+from Cafe_Project.core.db_manager import Base, session, engine
 
 
 class User(Base):
     __tablename__ = 'users'
     id = Column('user_id', Integer(), primary_key=True)
+    # id = Column('user_id', Integer(), primary_key=True, autoincrement=True)
     # todo: id = db.Column(db.Integer , primary_key=True , autoincrement=True)
     first_name = Column(String(15))
     last_name = Column(String(15))
@@ -27,4 +28,11 @@ class User(Base):
 
         session.commit()
 
-
+    @staticmethod
+    def check_login(id, password):
+        # question = session.query(User).filter_by(id=1).all()
+        question = session.query(User).all()
+        for q in question:
+            if str(q.id) == id:
+                if str(q.password) == password:
+                    return True

@@ -5,6 +5,7 @@
     <title>signup</title>
 <!--  	<link href="login.css" rel="stylesheet">-->
 	<link href="{{ url_for('static', filename='signup.css')}}" rel="stylesheet">
+
 </head>
 <body>
   <div class="container">
@@ -12,11 +13,14 @@
 	<div class="card">
 		<div class="card-image">
 			<h2 class="card-heading">
-				Get started
-				<small>Let us create your account</small>
+				Login
+				<small>Enter Your info to Login</small>
 			</h2>
 		</div>
 		<form class="card-form" action="{{ url_for('login') }}" method="post">
+            {% if error %}
+            <h4 class="card-info" style="color: red; margin: 0px; padding: 0px">wrong username or password</h4>
+            {% endif %}
 			<div class="input">
 				<input name="username" type="text" class="input-field"  required/>
 				<label class="input-label">user name</label>

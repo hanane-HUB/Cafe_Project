@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect
-from landing.user import User
+from models.user import User
 
 
 app = Flask(__name__)
@@ -42,9 +42,12 @@ def login():
     error = None
     if request.method == 'POST':
         if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-
-            # todo: check user info in database
-            return redirect(url_for('home'))
+            if User.check_login(request.form['username'], request.form['password']):
+                return redirect(url_for('home'))
+            else:
+                error = "<h1> invalid user pass </h1>"
+                return render_template('login.html', error=error)
+                # todo: error
 
         else:
             # todo: cashier panel
@@ -55,3 +58,5 @@ def login():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
