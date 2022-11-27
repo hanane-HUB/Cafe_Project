@@ -17,6 +17,13 @@
 			</h2>
 		</div>
 		<form class="card-form" action="{{ url_for('sign_up') }}" method="post">
+            {% if error %}
+            <h4 class="card-info" style="color: red; margin: 0px; padding: 0px">username taken!</h4>
+            {% endif %}
+            <div class="input">
+				<input name="user_name" type="text" class="input-field"  required/>
+				<label class="input-label">user name</label>
+			</div>
 			<div class="input">
 				<input name="first_name" type="text" class="input-field"  required/>
 				<label class="input-label">First name</label>

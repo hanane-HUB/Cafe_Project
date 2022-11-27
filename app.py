@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
-from models.user import User
-
+# from models.user import User
+from Cafe_Project.user.utils import check_login, add_user, check_username
 
 app = Flask(__name__)
 
@@ -23,13 +23,17 @@ def signup_page():
 
 @app.route('/sign_up', methods=['POST'])
 def sign_up():
+    username = request.form['user_name']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     email = request.form['email']
     phone = request.form['phone']
     password = request.form['password']
-    User.add(4, first_name, last_name, phone, email, password)
-    return render_template('index.html')
+    if check_username(username):
+        add_user(username=username, fname=first_name, lname=last_name, phone=phone, email=email, password=password)
+        return render_template('index.html', autorize=True)
+    else:
+        return render_template('signup.html', error=True)
 
 
 @app.route('/login')
@@ -42,11 +46,10 @@ def login():
     error = None
     if request.method == 'POST':
         if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            if User.check_login(request.form['username'], request.form['password']):
+            if check_login(request.form['username'], request.form['password']):
                 return render_template('index.html', autorize=True)
             else:
-                error = "<h1> invalid user pass </h1>"
-                return render_template('login.html', error=error)
+                return render_template('login.html', error=True)
                 # todo: error
 
         else:
