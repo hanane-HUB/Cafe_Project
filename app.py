@@ -43,7 +43,7 @@ def login():
     if request.method == 'POST':
         if request.form['username'] != 'admin' or request.form['password'] != 'admin':
             if User.check_login(request.form['username'], request.form['password']):
-                return redirect(url_for('home'))
+                return render_template('index.html', autorize=True)
             else:
                 error = "<h1> invalid user pass </h1>"
                 return render_template('login.html', error=error)

@@ -40,9 +40,13 @@
                 <li class="active"><a href="{{url_for('home')}}">Home</a></li>
                 <li><a href="{{url_for('about')}}">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="#tablebooking">Order list</a></li>
-                <li><a href="{{url_for('login_page')}}">Log in</a></li>
-                <li><a href="{{url_for('signup_page')}}">Sign up</a></li>
+                  {%  if autorize %}
+                  <li><a href="#tablebooking">Order list</a></li>
+                  <li><a href="{{ url_for('home') }}">Log out</a></li>
+                  {%  else %}
+                  <li><a href="{{url_for('login_page')}}">Log in</a></li>
+                  <li><a href="{{url_for('signup_page')}}">Sign up</a></li>
+                  {% endif %}
 
               </ul>
             </div>
