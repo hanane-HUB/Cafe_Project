@@ -10,6 +10,8 @@ class MenuItems(Base):
     category = Column(String(30))
     imgpath = Column(String)
 
-
-# Base.metadata.create_all(engine)
-# session.commit()
+    def __init__(self, name, price, cat, img):
+        self.name = name
+        self.price = price
+        self.category = cat
+        self.imgpath = img
