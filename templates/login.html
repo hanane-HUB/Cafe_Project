@@ -32,8 +32,9 @@
 			</div>
 			<div class="action">
 				<button class="action-button">Log in</button>
-                <p class="card-info" style="color: steelblue" >Or sign up for a new account</p>
-                <button href="{{ url_for('signup_page') }}" class="action-button">Sign up</button>
+                <div class="card-info">
+                    <a class="card-info" style="color: steelblue" href="{{ url_for('signup_page') }}">Or sign up for a new account</a>
+                </div>
 			</div>
 		</form>
 		<div class="card-info">
