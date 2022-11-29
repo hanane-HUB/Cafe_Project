@@ -1,6 +1,7 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, jsonify
 # from models.user import User
 from Cafe_Project.user.utils import check_login, add_user, check_username
+from menu_items.utils import get_menuitems
 
 app = Flask(__name__)
 
@@ -47,7 +48,9 @@ def login():
     if request.method == 'POST':
         if request.form['username'] != 'admin' or request.form['password'] != 'admin':
             if check_login(request.form['username'], request.form['password']):
-                return render_template('index.html', autorize=True)
+                foods = list(get_menuitems('food'))
+                drinks = list(get_menuitems('drink'))
+                return render_template('index.html', autorize=True, foods=foods, drinks=drinks)
             else:
                 return render_template('login.html', error=True)
                 # todo: error
