@@ -1,446 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bootstrappage.com free templates</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='carousel.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='carousel.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='teststyle.css') }}">
     <script src="themes/assets/js/ie8-responsive-file-warning.js"></script>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
-   <script src="themes/assets/js/ie8-responsive-file-warning.js"></script>
+    <script src="themes/assets/js/ie8-responsive-file-warning.js"></script>
 
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="{{ url_for('static', filename = 'testjs.js') }}"></script>
 
-  </head>
+</head>
 <!-- NAVBAR
 ================================================== -->
-  <body>
-    <div class="navbar-wrapper">
-      <div class="container">
+<body>
+<div class="navbar-wrapper">
+    <div class="container">
 
         <div class="navbar navbar-inverse navbar-static-top" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="index.html">YOU CAFE</a>
-            </div>
-            <div class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="{{url_for('home')}}">Home</a></li>
-                <li><a href="{{url_for('about')}}">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                  {%  if autorize %}
-{#     todo:                 {%  if autorize == 'admin' %}#}
-                  <li><a href="#tablebooking">Order list</a></li>
-                  <li><a href="{{ url_for('home') }}">Log out</a></li>
-                  {%  else %}
-                  <li><a href="{{url_for('login_page')}}">Log in</a></li>
-                  <li><a href="{{url_for('signup_page')}}">Sign up</a></li>
-                  {% endif %}
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">YOU CAFE</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
+                        <li><a href="{{ url_for('about') }}">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        {% if autorize %}
+                            {#     todo:                 {%  if autorize == 'admin' %}#}
+                            <li><a href="#tablebooking">Order list</a></li>
+                            <li><a href="{{ url_for('home') }}">Log out</a></li>
+                        {% else %}
+                            <li><a href="{{ url_for('login_page') }}">Log in</a></li>
+                            <li><a href="{{ url_for('signup_page') }}">Sign up</a></li>
+                        {% endif %}
 
-              </ul>
+                    </ul>
+                </div>
             </div>
-          </div>
         </div>
 
-      </div>
+    </div>
+</div>
+
+
+<img src="{{ url_for('static',filename = 'themes/assets/images/ucafe.jpg') }}" class="cafeimg">
+
+<div class="mainTitle">
+    <div class="container">
+        <h1>This is YOU cafe</h1>
+        <p>
+            YOU are Sooo welcomed to your cafe
+        </p>
+    </div>
+</div>
+
+
+<div class="container marketing">
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+        <div class="col-lg-4">
+            <img src="{{ url_for('static',filename = 'themes/assets/images/burger_pack.png') }}"
+                 alt="Generic placeholder image">
+            <h2>BURGUR MIX</h2>
+            <p>Big burger, mini burger , hotdog, fries , sauce</p>
+            {% if autorize %}
+                {#            todo: add order#}
+                <p><a class="btn btn-default" href="#" role="button">&pound; 5.2 Add to cart &raquo;</a></p>
+            {% else %}
+                <p><a class="btn btn-default" href="{{ url_for('login_page') }}" role="button">&pound; 5.2 Add to cart
+                    &raquo;</a></p>
+            {% endif %}
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img src="{{ url_for('static',filename = 'themes/assets/images/steak.png') }}"
+                 alt="Generic placeholder image">
+            <h2>STEAK</h2>
+            <p>Steak with fries</p>
+            {% if autorize %}
+                <p><a class="btn btn-default" href="#" role="button">&pound;5 Add to cart &raquo;</a></p>
+            {% else %}
+                <p><a class="btn btn-default" href="{{ url_for('login_page') }}" role="button">&pound;5 Add to cart
+                    &raquo;</a></p>
+            {% endif %}
+        </div>
+        <div class="col-lg-4">
+            <img src="{{ url_for('static',filename = 'themes/assets/images/shrimp.png') }}" alt="Lam Tikka">
+            <h2>SHRIMP SALAD</h2>
+            <p>Shrimp with corn salad </p>
+            {% if autorize %}
+
+                <p><a class="btn btn-default" href="#" role="button">&pound;4 Add to cart &raquo;</a></p>
+            {% else %}
+                <p><a class="btn btn-default" href="{{ url_for('login_page') }}" role="button">&pound;4 Add to cart
+                    &raquo;</a></p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="introSection">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="cntr">online food order system for you cafe <br><br> Order MENU </h1>
+                {% if not autorize %}
+                    <div class="cntr"><a class="btn btn-default" href="{{ url_for('login_page') }}" role="button">Login
+                        to see the menu</a></div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if autorize %}
+    <div id="products">
+        <div class="menulink">
+            <a href="#drink">appetizer</a><a href="#food">main foods</a><a href="#dessert">desserts</a>
+        </div>
+
+        <div id="drink" class="foodmenu">
+            {% for food in drinks %}
+                <div style="width: 250px;height: 350px;padding: 40px">
+                    <img style="width:200px;height:200px" src="{{ url_for('static', filename = food.imgpath) }}"
+                         alt='Generic placeholder image'>
+                    <h4>{{ food.name }}</h4>
+                    <h5>price : {{ food.price }}</h5>
+                    <a class="btn" style="font-size: 20px; padding-top: 0;margin-top: 0" href="#">add to card</a>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div id="food" class="foodmenu">
+            {% for food in foods %}
+                <div style="width: 250px;height: 350px;padding: 40px">
+                    <img style="width:200px;height:200px" src="{{ url_for('static', filename = food.imgpath) }}"
+                         alt='Generic placeholder image'>
+                    <h4>{{ food.name }}</h4>
+                    <h5>price : {{ food.price }}</h5>
+                    <a class="btn" style="font-size: 20px; padding-top: 0;margin-top: 0" href="#">add to card</a>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div id="dessert">
+            {% for food in desserts %}
+                <div style="width: 250px;height: 350px;padding: 40px">
+                    <img style="width:200px;height:250px" src="{{ url_for('static', filename = food.imgpath) }}"
+                         alt='Generic placeholder image'>
+                    <h4>{{ food.name }}</h4>
+                    <h5>price : {{ food.price }}</h5>
+                    <a class="btn" style="font-size: 20px; padding-top: 0;margin-top: 0" href="#">add to card</a>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 
 
-    <img src="{{url_for('static',filename = 'themes/assets/images/ucafe.jpg')}}" class="cafeimg">
-
-	<div class="mainTitle">
-	<div class="container">
-	<h1>This is YOU cafe</h1>
-	<p>
-	YOU are Sooo welcomed to your cafe
-	</p>
-	</div>
-	</div>
+{% endif %}
 
 
-    <div class="container marketing">
-      <!-- Three columns of text below the carousel -->
-      <div class="row">
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/burger_pack.png')}}" alt="Generic placeholder image">
-          <h2>BURGUR MIX</h2>
-          <p>Big burger, mini burger , hotdog, fries , sauce</p>
-          {%  if autorize %}
-{#            todo: add order#}
-            <p><a class="btn btn-default" href="#" role="button">&pound; 5.2 Add to cart &raquo;</a></p>
-          {% else %}
-            <p><a class="btn btn-default" href="{{url_for('login_page')}}" role="button">&pound; 5.2 Add to cart &raquo;</a></p>
-          {% endif %}
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/steak.png')}}" alt="Generic placeholder image">
-          <h2>STEAK</h2>
-          <p>Steak with fries</p>
-          {%  if autorize %}
-            <p><a class="btn btn-default" href="#" role="button">&pound;5 Add to cart &raquo;</a></p>
-          {% else %}
-            <p><a class="btn btn-default" href="{{url_for('login_page')}}" role="button">&pound;5 Add to cart &raquo;</a></p>
-          {% endif %}
-        </div>
-        <div class="col-lg-4">
-		  <img src="{{url_for('static',filename = 'themes/assets/images/shrimp.png')}}" alt="Lam Tikka">
-          <h2>SHRIMP SALAD</h2>
-          <p>Shrimp with corn salad </p>
-          {%  if autorize %}
 
-            <p><a class="btn btn-default" href="#" role="button">&pound;4 Add to cart &raquo;</a></p>
-          {% else %}
-            <p><a class="btn btn-default" href="{{url_for('login_page')}}" role="button">&pound;4 Add to cart &raquo;</a></p>
-          {% endif %}
-        </div>
-      </div>
-	</div>
 
-	<div class="introSection">
-		<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="cntr">online food order system for you cafe <br><br> Order MENU </h1>
-                {% if not autorize %}
-                <div class="cntr"><a class="btn btn-default" href="{{url_for('login_page')}}" role="button">Login to see the menu</a></div>
-                {%  endif %}
-			</div>
-		</div>
-		</div>
-	</div>
+<div class="introSection">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <h3>Welcome to Cafe</h3>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy
+                    text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+                    type specimen book.
+                    It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+                    essentially unchanged. <br><br>
+                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                    and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem
+                    Ipsum.
+                </p>
+            </div>
 
-    {%  if autorize %}
+            <div class="col-lg-4">
+                <h3>Welcome to cafe 2</h3>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy
+                    text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+                    type specimen book.
+                    It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+                    essentially unchanged. <br><br>
 
-	 <div class="container marketing">
-    <h2 class="itemsTitle">Drinks</h2>
-	<div id="myCarousel1" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <div class="carousel-inner">
-        <div class="item active">
-         <div class="row">
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/salate.png')}}" alt="Generic placeholder image">
-          <h4>Salates</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/burger.png')}}" alt="Generic placeholder image">
-          <h4>Meal</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/drinks.png')}}" alt="Generic placeholder image">
-          <h4>Drink</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
+                </p>
+
+            </div>
+
+            <div class="col-lg-3">
+                <h3>Welcome to cafe 3</h3>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy
+                    text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+                    type specimen book.
+
+                </p>
+
+            </div>
 
         </div>
-        <div class="item">
-         <div class="row">
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/salate.png')}}" alt="Generic placeholder image">
-          <h4>Salates</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/burger.png')}}" alt="Generic placeholder image">
-          <h4>Meal</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/drinks.png')}}" alt="Generic placeholder image">
-          <h4>Drink</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
+    </div>
+</div>
 
+
+<div class="container marketing">
+    <div id="myCarousel4" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="row featurette">
+                    <div class="col-md-7">
+                        <h2 class="featurette-heading">Fish and Chips <span
+                                class="text-muted">It's very very testy</span></h2>
+                        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta
+                            felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce
+                            dapibus, tellus ac cursus commodo.</p>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="themes/assets/images/fish-and-chips.png" alt="Fish and Chips">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item">
+                <div class="row featurette">
+                    <div class="col-md-5">
+                        <img src="themes/assets/images/burger.png" alt="Generic placeholder image">
+                    </div>
+                    <div class="col-md-7">
+                        <h2 class="featurette-heading">Oh yeah, very nice Burger. <span
+                                class="text-muted">Delicious.</span></h2>
+                        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta
+                            felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce
+                            dapibus, tellus ac cursus commodo.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item">
+                <div class="row featurette">
+                    <div class="col-md-7">
+                        <h2 class="featurette-heading">Try yourself <span class="text-muted">Testy</span></h2>
+                        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta
+                            felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce
+                            dapibus, tellus ac cursus commodo.</p>
+                    </div>
+                    <div class="col-md-5">
+                        <img class="img-circle" src="themes/assets/images/drinks.png" alt="Generic placeholder image">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="item">
-          <div class="row">
-        <div class="col-lg-4">
-          <img  src="{{url_for('static',filename = 'themes/assets/images/salate.png')}}" alt="Generic placeholder image">
-          <h4>Salates</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img  src="{{url_for('static',filename = 'themes/assets/images/burger.png')}}" alt="Generic placeholder image">
-          <h4>Meal</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img  src="{{url_for('static',filename = 'themes/assets/images/drinks.png')}}" alt="Generic placeholder image">
-          <h4>Drink</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
-        </div>
-      </div>
-      <a class="left carousel-control" href="#myCarousel1" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a class="right carousel-control" href="#myCarousel1" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
     </div><!-- /.carousel -->
-	</div>
-
-	<div class="container marketing">
-    <h2 class="itemsTitle">Lunch</h2>
-	<div id="myCarousel2" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <div class="carousel-inner">
-        <div class="item active">
-         <div class="row">
-        <div class="col-lg-4">
-           <img src="{{url_for('static',filename = 'themes/assets/images/salate.png')}}" alt="Generic placeholder image">
-          <h4>Salates</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-         <img src="{{url_for('static',filename = 'themes/assets/images/chicken.png')}}" alt="Generic placeholder image">
-          <h4>Meal</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/drinks_lussy.png')}}" alt="Generic placeholder image">
-          <h4>Drink</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
-
-        </div>
-        <div class="item">
-         <div class="row">
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/chicken_fry.png')}}" alt="Generic placeholder image">
-          <h4>Salates</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/fish-and-chips.png')}}" alt="Generic placeholder image">
-          <h4>Meal</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/drinks.png')}}" alt="Generic placeholder image">
-          <h4>Drink</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
-
-        </div>
-        <div class="item">
-          <div class="row">
-        <div class="col-lg-4">
-          <img  src="{{url_for('static',filename = 'themes/assets/images/salate.png')}}" alt="Generic placeholder image">
-          <h4>Salates</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img  src="{{url_for('static',filename = 'themes/assets/images/burger.png')}}" alt="Generic placeholder image">
-          <h4>Meal</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img  src="{{url_for('static',filename = 'themes/assets/images/drinks.png')}}" alt="Generic placeholder image">
-          <h4>Drink</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
-        </div>
-      </div>
-      <a class="left carousel-control" href="#myCarousel2" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a class="right carousel-control" href="#myCarousel2" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-    </div><!-- /.carousel -->
-	</div>
-
-	<div class="container marketing">
-    <h2 class="itemsTitle">Dinner</h2>
-	<div id="myCarousel3" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <div class="carousel-inner">
-        <div class="item active">
-         <div class="row">
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/chicken_fry.png')}}" alt="Generic placeholder image">
-          <h4>Chicken</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/rice.png')}}" alt="Generic placeholder image">
-          <h4>Rice</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/drinks.png')}}" alt="Generic placeholder image">
-          <h4>Drink</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
-
-        </div>
-        <div class="item">
-         <div class="row">
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/courinder.png')}}" alt="Generic placeholder image">
-          <h4>Salates</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/burger.png')}}" alt="Generic placeholder image">
-          <h4>Meal</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="{{url_for('static',filename = 'themes/assets/images/drinks.png')}}" alt="Generic placeholder image">
-          <h4>Drink</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
-
-        </div>
-        <div class="item">
-          <div class="row">
-        <div class="col-lg-4">
-          <img  src="{{url_for('static',filename = 'themes/assets/images/salate.png')}}" alt="Generic placeholder image">
-          <h4>Salates</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img  src="{{url_for('static',filename = 'themes/assets/images/chicken_fry.png')}}" alt="Generic placeholder image">
-          <h4>Chicken</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img  src="{{url_for('static',filename = 'themes/assets/images/drinks.png')}}" alt="Generic placeholder image">
-          <h4>Drink</h4>
-          <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
-        </div>
-      </div>
-      <a class="left carousel-control" href="#myCarousel3" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a class="right carousel-control" href="#myCarousel3" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-    </div><!-- /.carousel -->
-	</div>
-	
-    {% endif %}
-
-	      
-
-	
-	<div class="introSection">
-		<div class="container">
-		<div class="row">
-		<div class="col-lg-5">
-		<h3>Welcome to Cafe</h3>
-		<p>
-		Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy 
-		text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-		It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. <br><br>
-		It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-		and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-		</p>
-		</div>
-		
-		<div class="col-lg-4">
-		<h3>Welcome to cafe 2</h3>
-		<p>
-		Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy 
-		text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-		It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. <br><br>
-		
-		</p>
-		
-		</div>
-		
-		<div class="col-lg-3">
-		<h3>Welcome to cafe 3</h3>
-		<p>
-		Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy 
-		text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-		
-		</p>
-		
-		</div>
-		
-		</div>
-		</div>
-	</div>
+</div><!-- /.container -->
+<!-- /END THE FEATURETTES -->
 
 
-   <div class="container marketing">
-   <div id="myCarousel4" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <div class="carousel-inner">
-      <div class="item active">
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">Fish and Chips <span class="text-muted">It's very very testy</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5">
-          <img src="themes/assets/images/fish-and-chips.png" alt="Fish and Chips">
-        </div>
-      </div>
-      </div>
-
-      
-	<div class="item">
-      <div class="row featurette">
-        <div class="col-md-5">
-          <img src="themes/assets/images/burger.png" alt="Generic placeholder image">
-        </div>
-        <div class="col-md-7">
-          <h2 class="featurette-heading">Oh yeah, very nice Burger. <span class="text-muted">Delicious.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-      </div>
-      </div>
-
-
-	<div class="item">
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">Try yourself <span class="text-muted">Testy</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5">
-		  <img class="img-circle" src="themes/assets/images/drinks.png" alt="Generic placeholder image">
-        </div>
-      </div>
-      </div>
-	   </div>
-    </div><!-- /.carousel -->	  
-    </div><!-- /.container -->
-      <!-- /END THE FEATURETTES -->
-
-
-      <!-- FOOTER -->
-      <footer>
-		<div class="container">
+<!-- FOOTER -->
+<footer>
+    <div class="container">
         <p class="pull-right"><a href="#">Back to top</a></p>
         <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-		</div>
-      </footer>
+    </div>
+</footer>
 
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="{{url_for('static',filename = 'themes/dist/js/bootstrap.min.js')}}"></script>
-    <script src="{{url_for('static',filename = 'themes/assets/js/holder.js')}}"></script>
-
-  </body>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="{{ url_for('static',filename = 'themes/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static',filename = 'themes/assets/js/holder.js') }}"></script>
+<script src="{{ url_for('static', filename = 'testjs.js') }}"></script>
+</body>
 </html>

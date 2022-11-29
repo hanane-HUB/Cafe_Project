@@ -57,7 +57,37 @@ body {
   min-width: 100%;
   height: 800px;
 }
-
+.foodmenu{
+  width: 100%;
+  background-color: darkseagreen;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  vertical-align: center;
+  horiz-align: center;
+  align-items: center;
+  margin: 10px;
+}
+.menulink{
+  padding-top: 15px;
+  font-size: 28px;
+  height: 60px;
+  text-align: center;
+  vertical-align: center;
+  horiz-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.menulink > a{
+  color: #2b542c;
+  text-decoration: none;
+}
+.menulink > a:hover{
+  color: darkseagreen;
+  text-decoration: none;
+}
 
 /* MARKETING CONTENT
 -------------------------------------------------- */
@@ -116,8 +146,8 @@ a:hover{color:#eee}
 .highlightSection .media{background-color: #efefef;border: 1px solid #efefef;color: #939393;padding: 10px;text-align: center;}
 .introSection{background-color: #efefef; padding:28px 0}
 .brandBtn{background-color: #7db641;}
-.btn-default{color: #fff;background-color: #7db641;border-color: #7db641;border-radius:0}
-.btn-default.active, .open .dropdown-toggle.btn-default, .btn-default:hover, .btn-default:focus, .btn-default:active {color: #fff;background-color: #c83a3a ;border-color: #c83a3a ;}
+.btn-default{color: #fff;background-color: darkseagreen;border-color: darkseagreen;border-radius:0}
+.btn-default.active, .open .dropdown-toggle.btn-default, .btn-default:hover, .btn-default:focus, .btn-default:active {color: #fff;background-color: red ;border-color: #c83a3a ;}
 .text-primary-theme {color: #7db641;}
 .text-danger-theme {color: #FF007A;}
 .carousel-control.right, .carousel-control.left,
