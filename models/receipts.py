@@ -1,7 +1,6 @@
 from Cafe_Project.core.db_manager import Base, session,engine
 from sqlalchemy import Column, Integer, Float, Boolean
 from sqlalchemy import create_engine, ForeignKey
-from Cafe_Project.models.orders import Order
 from Cafe_Project.models.table import Table
 from Cafe_Project.models.user import User
 
@@ -9,11 +8,11 @@ from Cafe_Project.models.user import User
 class Receipt(Base):
     __tablename__ = 'receipts'
     id = Column('receipt_id', Integer, primary_key=True)
-    order_id = Column(Integer, ForeignKey(Order.id))
     table_id = Column(Integer, ForeignKey(Table.id))
     user_id = Column(Integer, ForeignKey(User.id))
     total_price = Column(Float)
     pay = Column(Boolean)
 
-Base.metadata.create_all(engine)
-session.commit()
+
+# Base.metadata.create_all(engine)
+# session.commit()
