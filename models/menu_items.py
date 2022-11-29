@@ -1,4 +1,4 @@
-from core.db_manager import Base
+from Cafe_Project.core.db_manager import Base, session, engine
 from sqlalchemy import Column, Integer, String, Date, Float
 
 
@@ -8,5 +8,10 @@ class MenuItems(Base):
     name = Column(String(30))
     price = Column(Float)
     category = Column(String(30))
+    imgpath = Column(String)
 
-
+    def __init__(self, name, price, cat, img):
+        self.name = name
+        self.price = price
+        self.category = cat
+        self.imgpath = img
