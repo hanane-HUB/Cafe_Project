@@ -52,6 +52,24 @@ def login():
 
     return render_template('login.html', error=error)
 
+@app.route('/orders')
+def orders():
+    orders_list = Order.query.all()
+    return render_template('orders_table.html', orders_list=orders_list)
+
+
+@app.route('/orders', methods=['POST'])
+def get_status_order():
+    order_id = request.form["order_id"]
+    order_id = int(order_id)
+    order = session.query(Order).filter(Order.id == order_id)
+    status = request.form["status_order"]
+    for j in order:
+        j.status = status
+    session.commit()
+    orders_list = Order.query.all()
+    return render_template('orders_table.html', orders_list=orders_list)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
