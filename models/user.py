@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from Cafe_Project.core.db_manager import Base, session, engine
+from core.db_manager import Base, session, engine
 
 
 class User(Base):

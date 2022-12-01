@@ -1,4 +1,4 @@
-from Cafe_Project.core.db_manager import Base, session, engine
+from core.db_manager import Base, session, engine
 from sqlalchemy import Column, Integer, String, ARRAY, Boolean
 
 
@@ -9,6 +9,6 @@ class Table(Base):
     available = Column(Boolean)
 
 
-Base.metadata.create_all(engine)
-session.commit()
+# Base.metadata.create_all(engine)
+# session.commit()
 

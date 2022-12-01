@@ -1,5 +1,5 @@
-from Cafe_Project.models.user import User
-from Cafe_Project.core.db_manager import session
+from models.user import User
+from core.db_manager import session
 
 
 def add_user(username, fname, lname, phone, email, password):

@@ -1,7 +1,9 @@
-from flask import Flask, render_template, url_for, request, redirect, jsonify
-# from models.user import User
-from Cafe_Project.user.utils import check_login, add_user, check_username
+from flask import Flask, render_template, url_for, request, redirect
+from core.db_manager import session
+from models.menu_items import MenuItems
+from user.utils import check_login, add_user, check_username
 from menu_items.utils import get_menuitems
+from order.utils import get_order_list,change_status, add_order
 
 app = Flask(__name__)
 
@@ -32,7 +34,9 @@ def sign_up():
     password = request.form['password']
     if check_username(username):
         add_user(username=username, fname=first_name, lname=last_name, phone=phone, email=email, password=password)
-        return render_template('index.html', autorize=True)
+        foods = list(get_menuitems('food'))
+        drinks = list(get_menuitems('drink'))
+        return render_template('index.html', autorize=True, foods=foods, drinks=drinks)
     else:
         return render_template('signup.html', error=True)
 
@@ -53,17 +57,19 @@ def login():
                 return render_template('index.html', autorize=True, foods=foods, drinks=drinks)
             else:
                 return render_template('login.html', error=True)
-                # todo: error
+
 
         else:
-            # todo: cashier panel
-            error = 'Invalid Credentials. Please try again.'
+            foods = list(get_menuitems('food'))
+            drinks = list(get_menuitems('drink'))
+            return render_template('index.html', autorize='admin', foods=foods, drinks=drinks)
 
     return render_template('login.html', error=error)
 
+
 @app.route('/orders')
 def orders():
-    orders_list = Order.query.all()
+    orders_list = get_order_list()
     return render_template('orders_table.html', orders_list=orders_list)
 
 
@@ -71,13 +77,24 @@ def orders():
 def get_status_order():
     order_id = request.form["order_id"]
     order_id = int(order_id)
-    order = session.query(Order).filter(Order.id == order_id)
-    status = request.form["status_order"]
-    for j in order:
-        j.status = status
-    session.commit()
-    orders_list = Order.query.all()
+    change_status(order_id)
+    orders_list = get_order_list()
     return render_template('orders_table.html', orders_list=orders_list)
+
+
+@app.route('/home', methods=['POST'])
+def add_new_order():
+    item_id = request.form["item_id"]
+    print(item_id)
+    item_id = int(item_id)
+    item = session.query(MenuItems).filter(MenuItems.id == item_id)
+    item_id2 = 0
+    for i in item:
+        item_id2 = i.id
+    add_order(item_id2, 1, 1, 'new order', '12')
+    foods = list(get_menuitems('food'))
+    drinks = list(get_menuitems('drink'))
+    return render_template('index.html', autorize=True, foods=foods, drinks=drinks)
 
 
 if __name__ == '__main__':

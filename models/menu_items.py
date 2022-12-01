@@ -1,4 +1,4 @@
-from Cafe_Project.core.db_manager import Base, session, engine
+from core.db_manager import Base, session, engine
 from sqlalchemy import Column, Integer, String, Date, Float
 
 

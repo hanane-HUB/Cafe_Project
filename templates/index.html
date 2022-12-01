@@ -43,9 +43,13 @@
                         <li><a href="{{ url_for('about') }}">About Us</a></li>
                         <li><a href="contact.html">Contact</a></li>
                         {% if autorize %}
-                            {#     todo:                 {%  if autorize == 'admin' %}#}
-                            <li><a href="#tablebooking">Order list</a></li>
+                            {% if autorize == 'admin' %}
+                                <li><a href="{{ url_for('orders') }}">Orders</a></li>
+                                <li><a href="{{ url_for('home') }}">Log out</a></li>
+                            {% else %}
+{#                            <li><a href="{{ url_for('orders') }}">show receipt</a></li>#}
                             <li><a href="{{ url_for('home') }}">Log out</a></li>
+                            {% endif %}
                         {% else %}
                             <li><a href="{{ url_for('login_page') }}">Log in</a></li>
                             <li><a href="{{ url_for('signup_page') }}">Sign up</a></li>
@@ -142,7 +146,11 @@
                          alt='Generic placeholder image'>
                     <h4>{{ food.name }}</h4>
                     <h5>price : {{ food.price }}</h5>
-                    <a class="btn" style="font-size: 20px; padding-top: 0;margin-top: 0" href="#">add to card</a>
+                    <form action="{{ url_for('add_new_order') }}" method="post">
+                        <input type="hidden" id="item_id" name="item_id" value="{{ food.id }}"/>
+                        <input class="btn btn-primary"  type="submit" value="Submit">
+                    </form>
+
                 </div>
             {% endfor %}
         </div>
@@ -154,7 +162,10 @@
                          alt='Generic placeholder image'>
                     <h4>{{ food.name }}</h4>
                     <h5>price : {{ food.price }}</h5>
-                    <a class="btn" style="font-size: 20px; padding-top: 0;margin-top: 0" href="#">add to card</a>
+                    <form action="{{ url_for('add_new_order') }}" method="post">
+                        <input type="hidden" id="item_id" name="item_id" value="{{ food.id }}"/>
+                        <input class="btn btn-primary"  type="submit" value="Submit">
+                    </form>
                 </div>
             {% endfor %}
         </div>
