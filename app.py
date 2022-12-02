@@ -55,6 +55,24 @@ def login():
 
     return render_template('login.html', error=error)
 
+@app.route('/table_cashier', methods=['POST' ,'GET'])
+def get_status_table():
+    table_list = session.query(Table).all()
+    table_recipt=session.query(Receipt).all()
+    if request.method == 'POST':
+        table_id = request.form["table_id"]
+        table_id = int(table_id)
+        tables = session.query(Table).filter(Table.id == table_id)
+        status = request.form["status_table"]
+        for j in tables:
+            j.status = status
+        session.commit()
+        table_list = session.query(Table).all()
+        return render_template('table.html', table_list=table_list)
+    else:
+        table_list = session.query(Table).all()
+        return render_template('table.html', table_list=table_list)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
