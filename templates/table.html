@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabels</title>
+
+    <!-- Bootstrap core CSS -->
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='carousel.css') }}">
+    {#    <link href="{{ url_for('static') }}" rel="stylesheet">#}
+
+    <script src="themes/assets/js/ie8-responsive-file-warning.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <script src="themes/assets/js/ie8-responsive-file-warning.js"></script>
+
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    {#<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">#}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+</head>
+<!-- NAVBAR
+================================================== -->
+<body>
+<div class="navbar-wrapper row">
+    <div class="container row">
+
+        <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">YOU CAFE</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
+                        <li><a href="{{ url_for('about') }}">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#tablebooking">Order list</a></li>
+                        <li><a href="{{ url_for('login_page') }}">Log in</a></li>
+                        <li><a href="{{ url_for('signup_page') }}">Sign up</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container marketing">
+    <div style="height: 85px; background-color: #a9a9a5;">
+        <div class="h-auto d-inline-block" style="width: 120px; background-color: black"></div>
+
+    </div>
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+        {% for table in table_list %}
+            <div class="col-lg-4">
+                <img id="t1" class="img-circle"
+                     src="{{ url_for('static',filename = 'themes/assets/images/table2.jpg') }}"
+                     alt="Generic placeholder image">
+                <h2>Table Number :{{ table.id }}</h2>
+                <h6>Location : {{ table.position }}</h6>
+                <p> Total Price for this table : </p>
+
+{#                {% for recipt in table_recipt %}#}
+{#                    <p>{{ recipt.id }}</p>#}
+{#                    {% if table_recipt. id  ==  table. id %}#}
+{#                        <p> {{ recipt.total_price }} </p>#}
+{#                        <p>1001</p>#}
+{#                    {% else %}#}
+{#                        <p>0</p>#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
+                <h2>status:{{ table.status }}</h2>
+                <form action="{{ url_for('get_status_table') }}" method="post">
+                    <h3> change status : </h3>
+                    <select id="status_table" name="status_table">
+                        <option>Reserved</option>
+                        <option>Available</option>
+                        <option>Full</option>
+                    </select>
+                    <input type="hidden" id="table_id" name="table_id" value="{{ table.id }}"/>
+                    <input class="btn btn-default" type="submit" value="Submit">
+                </form>
+                {#                <p><a class="btn btn-default" href="#" role="button">&pound; 2.2 Add to cart &raquo;</a></p>#}
+            </div><!-- /.col-lg-4 -->
+        {% endfor %}
+    </div>
+
+</div>
+
+
+<!-- /.container -->
+<!-- /END THE FEATURETTES -->
+
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </div>
+</footer>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="{{ url_for('static',filename = 'themes/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static',filename = 'themes/assets/js/holder.js') }}"></script>
+
+</body>
+</html>
