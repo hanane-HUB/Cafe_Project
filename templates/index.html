@@ -45,6 +45,8 @@
                         {% if autorize %}
                             {% if autorize == 'admin' %}
                                 <li><a href="{{ url_for('orders') }}">Orders</a></li>
+                                <li><a href="{{ url_for('edit_menu_item') }}">Menu Item</a></li>
+{#                                <li><a href="{{ url_for('edit_menu_item') }}">Tables</a></li>#}
                                 <li><a href="{{ url_for('home') }}">Log out</a></li>
                             {% else %}
 {#                            <li><a href="{{ url_for('orders') }}">show receipt</a></li>#}

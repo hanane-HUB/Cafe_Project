@@ -1,5 +1,6 @@
 from core.db_manager import session
 from models.menu_items import MenuItems
+from models.receipts import Receipt
 
 
 def get_menuitems(cat):
@@ -14,4 +15,11 @@ def get_menuitems(cat):
             }
 
 
+def get_item():
+    return session.query(MenuItems).all()
 
+
+def add_item(name, price, cat, img):
+    item = MenuItems(name=name, price=price, cat=cat, img=img)
+    session.add(item)
+    session.commit()
