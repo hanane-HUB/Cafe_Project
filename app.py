@@ -69,9 +69,10 @@ def get_status_table():
         session.commit()
         table_list = session.query(Table).all()
         return render_template('table.html', table_list=table_list)
+
     else:
         table_list = session.query(Table).all()
-        return render_template('table.html', table_list=table_list)
+        return render_template('table.html', table_list=table_list ,table_recipt=table_recipt)
 
 
 if __name__ == '__main__':
