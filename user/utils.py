@@ -23,3 +23,8 @@ def check_username(username):
         if str(q.username) == username:
             return False
     return True
+
+
+def get_id(username):
+    user_id = session.query(User).filter_by(username=username).first().id
+    return user_id
