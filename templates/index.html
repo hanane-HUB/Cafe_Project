@@ -148,7 +148,7 @@
                          alt='Generic placeholder image'>
                     <h4>{{ food.name }}</h4>
                     <h5>price : {{ food.price }}</h5>
-                    <form action="{{ url_for('add_new_order') }}" method="post">
+                    <form action="{{ url_for('create_receipt') }}" method="post">
                         <input type="hidden" id="item_id" name="item_id" value="{{ food.id }}"/>
                         <input class="btn btn-primary"  type="submit" value="Submit">
                     </form>
@@ -164,7 +164,7 @@
                          alt='Generic placeholder image'>
                     <h4>{{ food.name }}</h4>
                     <h5>price : {{ food.price }}</h5>
-                    <form action="{{ url_for('add_new_order') }}" method="post">
+                    <form action="{{ url_for('create_receipt') }}" method="post">
                         <input type="hidden" id="item_id" name="item_id" value="{{ food.id }}"/>
                         <input class="btn btn-primary"  type="submit" value="Submit">
                     </form>
@@ -179,7 +179,10 @@
                          alt='Generic placeholder image'>
                     <h4>{{ food.name }}</h4>
                     <h5>price : {{ food.price }}</h5>
-                    <a class="btn" style="font-size: 20px; padding-top: 0;margin-top: 0" href="#">add to card</a>
+                    <form action="{{ url_for('create_receipt') }}" method="post">
+                        <input type="hidden" id="item_id" name="item_id" value="{{ food.id }}"/>
+                        <input class="btn btn-primary"  type="submit" value="Submit">
+                    </form>
                 </div>
             {% endfor %}
         </div>
