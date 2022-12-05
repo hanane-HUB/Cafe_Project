@@ -1,13 +1,15 @@
 from flask import Flask, render_template, url_for, request, redirect, abort
 from core.db_manager import session
-from receipt.utils import add_receipt, get_receipt, total_amount, check_user_receipt
-from tables.utils import check_table, reserve
+from receipt.utils import add_receipt, get_receipt, total_amount, check_user_receipt, update_total_amount, \
+    get_filter_receipt
+from tables.utils import check_table, reserve, get_filter_table
 from user.utils import check_login, add_user, check_username, get_id
 from menu_items.utils import get_menuitems, get_item, add_item
-from order.utils import get_order_list, change_status, add_order
+from order.utils import get_order_list, change_status, add_order, order_info
 
 app = Flask(__name__)
 global user_id, receipt_id
+
 
 @app.route("/")
 @app.route("/home")
@@ -78,8 +80,7 @@ def orders():
 
 @app.route('/orders', methods=['POST'])
 def get_status_order():
-    order_id = request.form["order_id"]
-    order_id = int(order_id)
+    order_id = int(request.form["order_id"])
     change_status(order_id)
     orders_list = get_order_list()
     return render_template('orders_table.html', orders_list=orders_list)
@@ -87,7 +88,7 @@ def get_status_order():
 
 @app.route('/add_new_order/<item_id>/<number>/<time_stamp>', methods=['POST', 'GET'])
 def add_new_order(item_id, number, time_stamp):
-    add_order(item_id=item_id, receid_id=receipt_id, number=number, status='new order', time_stamp=time_stamp)
+    add_order(item_id=item_id, receipt_id=receipt_id, number=number, status='new order', time_stamp=time_stamp)
     foods = list(get_menuitems('food'))
     drinks = list(get_menuitems('drink'))
     return render_template('index.html', autorize=True, foods=foods, drinks=drinks)
@@ -120,19 +121,55 @@ def create_receipt():
             reserve(table_id)
             return redirect(url_for('add_new_order', item_id=item_id, number=1, time_stamp='12'))
         else:
-            abort(401) # todo: app.errorhandler(404)-->render_template(''),404
+            abort(401)  # todo: app.errorhandler(404)-->render_template(''),404
 
 
-@app.route('/show_orders', methods=['GET', 'POST'])
-def show_orders():
+@app.route('/display_receipt', methods=['GET', 'POST'])
+def display_receipt():
+    receipt = get_filter_receipt(receipt_id)
+    table_id = receipt.table_id
+    orders_info = order_info(receipt_id)
+    update_total_amount(receipt_id)
+    return render_template('receipt.html', user_id=user_id, receipt=receipt, table_id=table_id,
+                           orders_info=orders_info, total=receipt.total_price)
+
+
+@app.route('/user_receipt', methods=['GET', 'POST'])
+def user_receipt():
+    global receipt_id
+    receipt_id = check_user_receipt(user_id)
+    if receipt_id:
+        return redirect(url_for('display_receipt'))
+    else:
+        abort(401)  # todo: app.errorhandler(404)-->render_template(''),404 | there's no order to have receipt
+
+
+@app.route('/pay_receipt', methods=['GET', 'POST'])
+def pay_receipt():
+    receipt = get_filter_receipt(receipt_id)
+    receipt.pay = True
+    table = get_filter_table(receipt.table_id)
+    table.available = True
+    session.commit()
+    return redirect(url_for('display_receipt'))
+
+
+@app.route('/receipt_list', methods=['GET', 'POST'])
+def receipt_list():
     receipts = get_receipt()
-    total = total_amount()
-    return render_template('receipt.html', receipts=receipts, total=total)
+    for receipt in receipts:
+        update_total_amount(receipt.id)
+    return render_template('receipt_list.html', receipts=receipts)
 
 
-@app.route('/receipt', methods=['GET', 'POST'])
-def receipt():
-    return render_template('receipt.html')
+@app.route('/paid_receipt', methods=['GET', 'POST'])
+def paid_receipt():
+    receipts = []
+    for receipt in get_receipt():
+        update_total_amount(receipt.id)
+        if receipt.pay:
+            receipts.append(receipt)
+    return render_template('receipt_list.html', receipts=receipts)
 
 
 if __name__ == '__main__':
